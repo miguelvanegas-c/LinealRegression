@@ -1,13 +1,3 @@
-Perfect, I’ve reviewed both notebooks:
-
-* **01_part1_linreg_1feature.ipynb** → Linear Regression with one feature (stellar mass vs luminosity)
-* **02_part2_polyreg.ipynb** → Polynomial Regression extension and model improvement
-
-Below is a **complete and well-structured README.md in English** that explains everything developed in both notebooks: objectives, theory, implementation, methodology, and results.
-
-You can copy this directly into your GitHub repository as `README.md`.
-
----
 
 # 📘 Machine Learning Project: Linear and Polynomial Regression for Stellar Data
 

@@ -285,39 +285,8 @@ This demonstrates why linear models are limited for non-linear relationships.
 
 ---
 
-# 🚀 Future Improvements
 
-Possible extensions of this project:
 
-* Try higher-degree polynomials
-* Apply regularization (Ridge/Lasso)
-* Use real astrophysical datasets
-* Compare with scikit-learn implementations
-* Add train/test split with quantitative metrics (R², RMSE)
 
----
 
-# 📚 Educational Purpose
 
-This project is designed as a learning exercise to:
-
-* Understand regression from first principles
-* Practice numerical optimization
-* Connect mathematics with code
-* Explore model limitations
-
----
-
-If you want, I can also generate for you a version:
-✅ more academic/formal
-✅ more GitHub-friendly (badges + table of contents)
-✅ shorter version
-✅ with equations in LaTeX only
-✅ with screenshots/figures placeholders
-
-Just say which one you want:
-**1) Academic style
-2) GitHub style
-3) Both
-4) Short version
-5) Enhanced professional README**

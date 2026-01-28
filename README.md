@@ -1,23 +1,17 @@
 
-# 📘 Machine Learning Project: Linear and Polynomial Regression for Stellar Data
+
+# 📘 Machine Learning Project: Linear and Polynomial Regression on Stellar Data
 
 ## 📌 Project Overview
 
-This project explores the relationship between **stellar mass (M)** and **stellar luminosity (L)** using supervised machine learning techniques. Two regression models are implemented from scratch:
+This project studies the relationship between **stellar mass** and **stellar luminosity** using regression techniques. Two different models are implemented and analyzed:
 
-1. **Linear Regression with one feature**
-2. **Polynomial Regression**
+1. A **linear regression model with one input feature**.
+2. A **polynomial regression model** that extends the first model to better capture non-linear behavior.
 
-The project demonstrates the full workflow of a machine learning experiment:
+The goal is to understand how well each model represents the data and why more complex models can improve prediction accuracy when the relationship between variables is not linear.
 
-* Data visualization
-* Model definition
-* Cost function formulation
-* Training using Gradient Descent
-* Model evaluation
-* Comparison between linear and polynomial models
-
-All implementations are done using **Python, NumPy, and Matplotlib**, without relying on high-level ML libraries (e.g., scikit-learn), in order to understand the mathematical foundations of regression.
+All models are implemented from scratch using Python, NumPy, and Matplotlib to better understand how regression works internally.
 
 ---
 
@@ -26,7 +20,7 @@ All implementations are done using **Python, NumPy, and Matplotlib**, without re
 ```
 .
 ├── 01_part1_linreg_1feature.ipynb   # Linear regression with one feature
-├── 02_part2_polyreg.ipynb          # Polynomial regression
+├── 02_part2_polyreg.ipynb          # Polynomial regression model
 └── README.md                       # Project documentation
 ```
 
@@ -34,24 +28,25 @@ All implementations are done using **Python, NumPy, and Matplotlib**, without re
 
 ## 🎯 Objectives
 
-* Analyze the relationship between stellar mass and luminosity.
-* Implement linear regression from scratch.
-* Extend the model to polynomial regression.
-* Evaluate model performance using cost functions.
-* Understand why a linear model is limited for non-linear data.
-* Visualize predictions and training behavior.
+* Explore the relationship between stellar mass and luminosity.
+* Visualize the dataset and identify patterns.
+* Build a linear regression model from scratch.
+* Evaluate the limitations of a linear model.
+* Improve the model using polynomial regression.
+* Compare both models and analyze their performance.
+* Understand the importance of feature engineering and normalization.
 
 ---
 
 ## 📊 Dataset Description
 
-The dataset contains astrophysical measurements:
+The dataset contains physical properties of stars:
 
-* **M (Mass)**: Stellar mass
-* **L (Luminosity)**: Stellar luminosity
-* **T (Temperature)**: Stellar temperature (used in the polynomial model)
+* **Mass (M)**: The mass of a star.
+* **Luminosity (L)**: The brightness of a star.
+* **Temperature (T)**: Additional feature used in the second notebook.
 
-The main learning task is to predict **L** as a function of **M** (and extended features).
+The main objective is to predict luminosity based on mass and extended features.
 
 ---
 
@@ -59,94 +54,83 @@ The main learning task is to predict **L** as a function of **M** (and extended 
 
 Notebook: `01_part1_linreg_1feature.ipynb`
 
-## 1️⃣ Data Visualization
-
-The first step is plotting luminosity (L) versus mass (M):
-
-* A scatter plot is created to observe the relationship.
-* The plot shows a **non-linear increasing trend**, indicating that a simple linear model may be insufficient.
-
-This visualization motivates the need for more expressive models.
+This notebook focuses on building and analyzing a simple linear regression model using only one input feature: stellar mass.
 
 ---
 
-## 2️⃣ Model Definition
+## 1. Data Visualization
 
-The linear regression hypothesis is defined as:
+The notebook begins by plotting stellar mass against luminosity using a scatter plot.
+This allows visual inspection of the data and reveals that:
 
-[
-\hat{y} = wM + b
-]
+* The relationship between mass and luminosity increases continuously.
+* The pattern is curved rather than straight.
+* A simple straight line may not describe the data accurately.
 
-Where:
-
-* `w` = weight (slope)
-* `b` = bias (intercept)
-* `M` = stellar mass
-* `ŷ` = predicted luminosity
+This step is essential to understand the nature of the problem before modeling.
 
 ---
 
-## 3️⃣ Cost Function
+## 2. Model Construction
 
-The Mean Squared Error (MSE) cost function is used:
+A linear regression model is created that attempts to predict luminosity using only mass.
+The model tries to find the best straight line that fits the data.
 
-[
-J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (\hat{y}_i - y_i)^2
-]
+The notebook defines:
 
-This measures how far predictions are from actual values.
-
----
-
-## 4️⃣ Gradient Descent Optimization
-
-Gradient descent is implemented manually to minimize the cost function:
-
-[
-w := w - \alpha \frac{\partial J}{\partial w}
-]
-[
-b := b - \alpha \frac{\partial J}{\partial b}
-]
-
-Where:
-
-* `α` is the learning rate.
-* The gradients are computed analytically.
-* Iterative updates improve the model parameters.
+* Model parameters.
+* A prediction function.
+* A way to measure how far predictions are from real values.
 
 ---
 
-## 5️⃣ Training Process
+## 3. Training the Model
 
-* Initial values for `w` and `b` are chosen.
-* The algorithm runs for multiple iterations.
-* Cost values are tracked to verify convergence.
-* A learning curve is plotted.
+The model is trained using an iterative optimization process:
+
+* Initial values are assigned to the model parameters.
+* The algorithm repeatedly adjusts these parameters.
+* Each step aims to reduce prediction error.
+* The cost (error) is tracked across iterations.
+
+This process shows how the model gradually improves during training.
 
 ---
 
-## 6️⃣ Prediction and Visualization
+## 4. Visualization of Training Results
 
 After training:
 
-* Predictions are generated for given mass values.
-* A regression line is plotted on top of the data points.
-* Visual comparison shows that the linear model does not fully capture the curved trend of the data.
+* The fitted regression line is plotted on top of the original data.
+* Predictions are compared with real luminosity values.
+* A cost curve is plotted to show how the error decreases over time.
+
+These plots help confirm whether the model is learning correctly.
 
 ---
 
-## 7️⃣ Model Evaluation
+## 5. Model Evaluation
 
-The model is evaluated using:
+The linear regression model is evaluated by analyzing:
 
-* Training cost
-* Test predictions
-* Comparison between predicted and real luminosity values
+* Prediction accuracy.
+* Shape of the fitted line.
+* Remaining error.
 
-Conclusion:
-**The linear model underfits the data due to the non-linear nature of the relationship.**
+The results show that although the model captures the general trend, it fails to represent the curved nature of the data accurately. This leads to systematic prediction errors.
+
+---
+
+## 6. Limitations of the Linear Model
+
+The notebook concludes that:
+
+* The relationship between mass and luminosity is not linear.
+* A straight line cannot represent the real growth behavior of luminosity.
+* The model suffers from underfitting.
+* A more flexible model is required.
+
+This motivates the transition to polynomial regression.
 
 ---
 
@@ -154,105 +138,85 @@ Conclusion:
 
 Notebook: `02_part2_polyreg.ipynb`
 
-To overcome the limitations of linear regression, polynomial regression is implemented.
+This notebook extends the previous work by building a polynomial regression model that can represent curved relationships.
 
 ---
 
-## 1️⃣ Feature Engineering
+## 1. Feature Engineering
 
-New polynomial features are created:
+New features are created from the original mass variable by transforming it into higher-order terms.
+This allows the model to learn non-linear patterns in the data.
 
-[
-M, M^2, M^3, \dots
-]
-
-This transforms the original problem into a higher-dimensional linear regression problem.
+Additional variables such as temperature are also included to enrich the input data.
 
 ---
 
-## 2️⃣ Data Normalization
+## 2. Data Normalization
 
-To improve numerical stability and convergence:
+Before training, the data is normalized:
 
-* Features are normalized using mean normalization.
-* This ensures all features are on similar scales.
+* All features are scaled to similar ranges.
+* This improves numerical stability.
+* Training becomes faster and more reliable.
 
----
-
-## 3️⃣ Multivariable Regression Model
-
-The hypothesis becomes:
-
-[
-\hat{y} = w_0 + w_1 M + w_2 M^2 + w_3 M^3
-]
-
-This allows the model to represent curved relationships.
+Normalization is a key step for models with multiple features.
 
 ---
 
-## 4️⃣ Cost Function (Vectorized)
+## 3. Model Training
 
-A vectorized implementation of the cost function is used for efficiency:
+A multivariable regression model is trained using the same optimization strategy as before, but now with more parameters.
 
-[
-J(\vec{w}) = \frac{1}{2m} \sum (\hat{y} - y)^2
-]
+During training:
 
----
-
-## 5️⃣ Gradient Descent (Multivariable)
-
-Gradient descent is extended to multiple parameters:
-
-* Uses matrix operations
-* Faster and more scalable
-* Iteratively updates the weight vector
+* The model gradually reduces prediction error.
+* The cost function decreases consistently.
+* Parameter updates are done using vectorized operations for efficiency.
 
 ---
 
-## 6️⃣ Model Training
+## 4. Visualization of Polynomial Fit
 
-* Training is performed over several iterations.
-* Cost reduction is monitored.
-* The algorithm converges to a better solution than linear regression.
+After training:
 
----
+* A curved regression line is plotted over the data.
+* The model follows the actual data distribution more closely than the linear model.
+* Predictions align better with observed luminosity values.
 
-## 7️⃣ Visualization of Polynomial Fit
-
-The polynomial curve is plotted against the dataset:
-
-* Shows a better fit to the curved data
-* Captures the growth trend of luminosity more accurately
+This demonstrates the advantage of using polynomial regression for non-linear data.
 
 ---
 
-## 8️⃣ Comparison with Linear Regression
+## 5. Model Comparison
 
-| Model                 | Behavior                  |
-| --------------------- | ------------------------- |
-| Linear Regression     | Underfits the data        |
-| Polynomial Regression | Fits non-linear trend     |
-| Cost Value            | Lower in polynomial model |
-| Prediction Accuracy   | Improved                  |
+The two models are compared in terms of performance and behavior:
 
-This demonstrates why linear models are limited for non-linear relationships.
+| Aspect              | Linear Regression | Polynomial Regression |
+| ------------------- | ----------------- | --------------------- |
+| Shape of prediction | Straight line     | Curved line           |
+| Fit to data         | Poor              | Much better           |
+| Error               | Higher            | Lower                 |
+| Flexibility         | Low               | High                  |
+| Underfitting        | Yes               | Reduced               |
+
+The polynomial model clearly outperforms the linear model for this dataset.
 
 ---
 
-# 🧠 Key Concepts Covered
+# 🧠 Key Concepts Learned
 
-* Supervised Learning
-* Linear Regression
-* Polynomial Regression
-* Gradient Descent
-* Cost Functions
-* Feature Scaling
-* Data Visualization
-* Model Evaluation
-* Overfitting vs Underfitting
-* Mathematical foundations of ML
+This project covers important machine learning concepts:
+
+* Data visualization and exploration
+* Linear regression
+* Polynomial regression
+* Feature engineering
+* Normalization
+* Model training
+* Model evaluation
+* Underfitting vs improved fitting
+* Model comparison
+* Interpretation of results
 
 ---
 
@@ -267,16 +231,12 @@ This demonstrates why linear models are limited for non-linear relationships.
 
 # 📈 Results and Conclusions
 
-* The relationship between stellar mass and luminosity is clearly non-linear.
-* Linear regression provides a rough approximation but leaves significant error.
-* Polynomial regression significantly improves prediction accuracy.
-* Feature engineering and normalization are essential for good performance.
-* Visual analysis is crucial to understanding model behavior.
+* Stellar mass and luminosity have a non-linear relationship.
+* Linear regression is too simple for this problem.
+* Polynomial regression provides a better approximation.
+* Visualization plays a crucial role in understanding model behavior.
+* Feature engineering significantly improves model performance.
 
 ---
-
-
-
-
 
 

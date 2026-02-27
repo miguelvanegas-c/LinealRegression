@@ -1,0 +1,230 @@
+================================================================================
+AUTOMATIC COPILOT EVALUATION – TA GRADING REPORT
+Repository: miguelvanegas-c/LinealRegression
+Topic: Stellar Luminosity – Linear and Polynomial Regression from First Principles
+================================================================================
+
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+The repository demonstrates a solid, mostly complete implementation of both
+linear and polynomial regression from scratch. The student correctly applies
+NumPy vectorization, implements gradient descent in both vectorized and
+non-vectorized forms, produces the mandatory cost surface and convergence plots,
+runs three learning-rate experiments, and carries out the required polynomial
+feature-selection and interaction-coefficient experiments. Conceptual
+understanding is adequately articulated throughout the notebooks. The main
+weaknesses are: (1) the absence of any AWS SageMaker execution evidence in
+the README, (2) the use of pandas (not an allowed library) for a cosmetic
+DataFrame display in Notebook 2, (3) no explicit convergence plot in Notebook 2,
+and (4) the inference demo in Notebook 2 uses hardcoded weight values instead of
+the weights learned in the preceding training cell.
+
+--------------------------------------------------------------------------------
+GRADING BREAKDOWN (0.0 – 5.0 scale)
+--------------------------------------------------------------------------------
+
+1. Repository Structure & Compliance          0.40 / 0.50
+   - README present: YES
+   - Two notebooks present (Part I and Part II): YES
+   - Datasets defined inside notebooks: YES
+   - Only allowed libraries (Python, NumPy, Matplotlib): PARTIAL
+     * Notebook 2 (cell 3) imports pandas for a DataFrame inspection display.
+       pandas is not in the permitted library list. Usage is cosmetic only
+       (data.head()) but still constitutes a constraint violation.
+     Deduction: -0.10
+
+2. Notebook 1 – Linear Regression             1.80 / 2.00
+   - Dataset visualization and interpretation: YES. Scatter plot produced;
+     correct observation that the relationship is non-linear and curved.
+   - Hypothesis (predict) and MSE (compute_cost): YES. Both implemented
+     correctly with clear formulas.
+   - Cost surface (MANDATORY): YES. 3D surface plot over a w–b grid is
+     present with a correct explanation of what the minimum represents.
+   - Gradient derivation: YES. Both dJ/dw and dJ/db are derived and
+     implemented.
+   - Non-vectorized gradient descent: YES. Explicit loop over samples
+     implemented; however, the final summation still delegates to np.sum
+     rather than a pure Python accumulator loop, which is a minor
+     inconsistency with "no loop over samples" intent.
+   - Vectorized gradient descent: YES. Clean NumPy vectorization.
+   - Convergence plot (MANDATORY): YES. Cost vs. iterations is plotted with
+     a brief but adequate commentary on convergence behavior.
+   - Multiple learning-rate experiments (≥3, MANDATORY): YES. Three rates
+     tested (0.0001, 0.1, 0.59); divergence at the largest rate is correctly
+     identified and explained.
+   - Final fit plot and error discussion: YES. Regression line overlaid on
+     scatter plot; systematic underfitting error noted.
+   - Conceptual questions (meaning of w, limits of linearity): YES. Both
+     addressed concisely and correctly.
+   Deductions:
+     * No per-learning-rate convergence plot (only final parameters reported
+       for the three experiments): -0.10
+     * The non-vectorized implementation partially delegates to np.sum instead
+       of a fully manual loop: -0.05
+     * Convergence commentary is minimal: -0.05
+
+3. Notebook 2 – Polynomial Regression         1.60 / 2.00
+   - Visualization with temperature encoding: YES. Scatter plot with plasma
+     colormap encoding temperature.
+   - Feature engineering [M, T, M², M·T]: YES. All four features are used
+     in model M3; M1 uses [M, T], M2 uses [M, T, M²], M3 uses [M, T, M², M·T].
+   - Vectorized loss and gradients: YES. Matrix operations used throughout.
+   - Training and convergence plot: PARTIAL. Training loop present and cost
+     history is tracked, but no convergence plot (cost vs. iterations) is
+     rendered in Notebook 2. This is a notable omission.
+   - Feature selection experiment – M1, M2, M3 comparison (MANDATORY): YES.
+     All three models trained; predicted-vs-actual plots shown for each.
+     However, no explicit numerical comparison of final losses across M1, M2,
+     M3 is presented.
+   - Interaction cost analysis – w_MT sweep (MANDATORY): YES. Clean sweep
+     over w_MT with a well-explained plot and commentary on interaction
+     importance.
+   - Inference example and interpretation (MANDATORY): YES. A new star
+     (M=1.3, T=6600) is evaluated, with correct normalization. However, the
+     weights used in the inference cell are hardcoded literals rather than the
+     variables learned in the preceding training cell, which is fragile and
+     indicative of a copy-paste issue.
+   Deductions:
+     * Missing convergence plot in Notebook 2: -0.20
+     * No explicit numerical loss comparison across M1/M2/M3: -0.10
+     * Hardcoded weights in inference cell instead of trained variables: -0.10
+
+4. Cloud Execution Evidence (SageMaker)        0.00 / 0.50
+   - Description of SageMaker execution: NOT PRESENT
+   - Screenshots of notebooks in SageMaker: NOT PRESENT
+   - Screenshots of successful execution: NOT PRESENT
+   - Screenshots of at least one plot: NOT PRESENT
+   - Local vs. cloud comparison: NOT PRESENT
+   The README documents the project thoroughly in terms of concepts and code,
+   but contains zero evidence of execution on AWS SageMaker.
+   Deduction: -0.50
+
+--------------------------------------------------------------------------------
+FINAL GRADE
+--------------------------------------------------------------------------------
+  Repository structure & compliance : 0.40 / 0.50
+  Notebook 1 – Linear regression    : 1.80 / 2.00
+  Notebook 2 – Polynomial regression: 1.60 / 2.00
+  Cloud execution evidence           : 0.00 / 0.50
+  ─────────────────────────────────────────────────
+  TOTAL                              : 3.80 / 5.00
+
+Final grade: 3.8 / 5.0   →   PASS  (minimum passing grade: 3.0 / 5.0)
+
+--------------------------------------------------------------------------------
+STRENGTHS
+--------------------------------------------------------------------------------
+- Complete mandatory items in Notebook 1: cost surface (3D), convergence plot,
+  and three learning-rate experiments are all present and correctly executed.
+- Both vectorized and non-vectorized gradient descent are implemented and
+  timed, showing practical awareness of computational efficiency.
+- Notebook 2 includes the full M1/M2/M3 feature progression as required,
+  with predicted-vs-actual plots for each model.
+- The w_MT interaction sweep is correctly implemented and well-explained,
+  demonstrating understanding of feature interactions.
+- Normalization is applied and its necessity is explained with reference to
+  a failure observed without it (realistic iterative problem-solving).
+- Dataset is entirely self-contained inside the notebooks as required.
+- Conceptual answers (meaning of w, limits of linearity) are accurate and
+  relevant.
+- Code is well-structured and readable with clear function docstrings.
+
+--------------------------------------------------------------------------------
+ISSUES & MISSING ELEMENTS
+--------------------------------------------------------------------------------
+- NO AWS SageMaker evidence whatsoever (no screenshots, no description).
+  This is the most significant gap and costs the full 0.5 cloud points.
+- No convergence plot in Notebook 2 despite history being tracked.
+- Pandas imported in Notebook 2, violating the "only NumPy and Matplotlib"
+  constraint.
+- Inference cell in Notebook 2 uses hardcoded weight literals instead of
+  the trained model variables; if the model is retrained with different
+  hyperparameters the inference result will be wrong.
+- No numerical table or print statement explicitly comparing final losses
+  of M1, M2, M3, making the comparison qualitative only.
+- Learning-rate experiments in Notebook 1 do not include convergence plots
+  per rate; only text descriptions of outcome are provided.
+
+--------------------------------------------------------------------------------
+TA FEEDBACK TO STUDENT
+--------------------------------------------------------------------------------
+Overall, this is a technically solid submission. The core implementations—
+gradient descent, cost surface, polynomial feature engineering, and the
+interaction sweep—are correct and well-presented. Your explanation of why
+normalization was necessary (and what happened without it) is a good example
+of reflective, iterative engineering work.
+
+To strengthen the submission:
+
+1. Add SageMaker evidence to the README immediately. This single item lost
+   you the entire half-point for cloud execution. A screenshot of the opened
+   notebook and at least one plot cell output in the SageMaker environment
+   is sufficient. Add a short paragraph describing how execution on the cloud
+   differed from running locally (e.g., instance type, any setup steps).
+
+2. Add a convergence plot to Notebook 2. You already collect the cost history
+   in 'cost_hist' — a two-line plt.plot call is all that is needed.
+
+3. Use trained variables in the inference cell. Replace the hardcoded weights
+   with the 'w_learned' and 'b_learned' variables from your last training
+   block. This makes the notebook reproducible and avoids silent errors if
+   hyperparameters change.
+
+4. Remove the pandas import from Notebook 2. The DataFrame display is
+   cosmetic; the same inspection can be done with a plain print statement and
+   NumPy, keeping you within the allowed library set.
+
+5. Consider adding a brief table comparing the final cost of M1, M2, and M3
+   numerically to strengthen the feature-selection discussion.
+
+--------------------------------------------------------------------------------
+AI-GENERATION ASSESSMENT  (NON-GRADING – informational only)
+--------------------------------------------------------------------------------
+
+A. Qualitative Assessment
+
+   Indicators suggesting AI assistance:
+   - Function docstrings follow a uniform, professional NumPy-style format
+     across both notebooks, which is uncommon in student homework.
+   - Markdown explanations are clean, generic, and structurally parallel
+     (each section ends with a brief, tidy summary sentence).
+   - The README is written in polished, standardized technical prose with
+     emoji section headers and a feature-comparison table—typical of
+     AI-assisted documentation.
+   - Explanation depth is uniform; no section shows notably deeper reasoning
+     or personal struggle beyond what the prompt required.
+
+   Indicators suggesting genuine human work:
+   - The comment in Notebook 2 describing the initial failure without
+     normalization ("the cost went to infinity and became undefined") reflects
+     real iterative debugging rather than a scripted explanation.
+   - The inference cell uses hardcoded weights—an error that AI would
+     typically not introduce but a student working step-by-step might.
+   - The non-vectorized implementation partially uses np.sum (a subtle
+     inconsistency) rather than a textbook-perfect loop, suggesting a student
+     adapting code rather than generating it from scratch.
+   - The choice of the learning rate 0.59 (which causes divergence) and the
+     observation about it suggest hands-on experimentation.
+
+B. Quantitative Estimate
+
+   Code (implementations, cells):     ~50% AI-assisted
+   Explanations / markdown (cells):   ~65% AI-assisted
+   README:                            ~75% AI-assisted
+
+C. Commentary
+
+   The project shows signs of a hybrid workflow: the student likely wrote or
+   adapted the core algorithmic logic themselves (evidenced by real bugs and
+   iterative fixes) while leaning on AI assistance for documentation,
+   docstrings, and README structure. The uniform quality of written
+   explanations contrasts with the uneven technical execution (missing plots,
+   hardcoded weights), which is a common pattern when explanatory text is
+   AI-generated but implementation is done manually.
+
+   This assessment is observational and does not imply misconduct.
+
+================================================================================
+END OF REPORT
+================================================================================
